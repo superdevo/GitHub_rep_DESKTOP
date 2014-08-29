@@ -1,0 +1,26 @@
+{% load staticfiles %}
+{% load polls_extra %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+
+<h1> {{ question.question_text }}</h1>
+<h2>TEST NEW FILTER, {{ "THIS IS BIG IN THE TEMPLATE"|lower }}  AND {{ "this is small"|upper }} and this has x letters in it: {{ "xxzyzkshzkxxhskwxx"|cut:"x" }}</h2>
+
+
+<p>
+{% upper %}
+this text is lower case in between a custom tag that converst it automatically.
+{% endupper %}
+</p>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+	<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+	<label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+{% endfor %}
+<input type="submit" value="Vote" />
+</form>
+<a href="{% url 'polls:index' %}">Go Back</a>

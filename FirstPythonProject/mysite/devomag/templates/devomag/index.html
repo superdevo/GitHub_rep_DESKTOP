@@ -1,0 +1,14 @@
+<h1>Blog Entries</h1>
+
+{% if blog_entries_list %}
+<ul>
+	{% for blogentry in blog_entries_list %}
+	<li><a href="{% url 'devomag:detail' blogentry.id %}">{{ blogentry.title }}</a></li>
+	{% endfor %}
+</ul>
+{% else %}
+<p>No Entries Found</p>
+{% endif %}
+
+
+<a href="{% url 'devomag:newarticle' %}">Submit a new article</a>

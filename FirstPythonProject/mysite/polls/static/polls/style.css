@@ -1,0 +1,26 @@
+body {
+	background: white url("images/bkg.jpg") no-repeat right bottom;
+}
+
+li a {
+	color: green;
+}
+
+ul {
+	color: yellow;
+}
+
+a {
+	color: white;
+}
+
+h1, h2, h3, h4, h5 {
+	color: red;
+}
+
+p {
+	color:red;
+}
+input, label {
+	color:yellow;
+}

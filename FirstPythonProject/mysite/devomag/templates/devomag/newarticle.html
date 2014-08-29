@@ -1,0 +1,12 @@
+<h2>Create and submit a new article.</h2>
+<form action="{% url 'devomag:newarticle' %}" method="post" id="new_article_form">
+{% csrf_token %}	
+{% for field in entry_form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+    </div>
+{% endfor %}
+<input type="submit" value="Submit"/>
+</form>
+<a href="{% url 'devomag:index' %}">Cancel submission and go back</a>

@@ -1,0 +1,6 @@
+<ul>
+	{% for a in authors %}
+		<li>{{ a.first_name }} {{ a.last_name }}</li>
+		<img src="{{ a.headshot }}" alt="{{ a.salutation }}{{ a.last_name }}"/>
+	{% endfor %}
+</ul>

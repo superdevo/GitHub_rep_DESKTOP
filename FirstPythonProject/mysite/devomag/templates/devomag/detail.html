@@ -1,0 +1,10 @@
+<h2>{{ blogentry.title }}</h2>
+<a href="{% url 'devomag:auth_details' blogentry.author.id %}" id="name_author">{{ blogentry.author.auth_name}}</a>
+<h3>{{ blogentry.pub_date }}</h3>
+<p>
+	{{ blogentry.content }}
+</p>
+
+<a href="{% url 'devomag:index' %}">Go back to Blog</a>
+
+

@@ -1,0 +1,20 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+	<title>Add Publisher</title>
+</head>
+<body>
+	<h1>Add Publisher</h1>
+	<form action="." method="POST">
+	{% csrf_token %}
+	{% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+    </div>
+	{% endfor %}
+			
+		<p><input type="submit" value="Submit"></p>
+	</form>
+</body>
+</html>

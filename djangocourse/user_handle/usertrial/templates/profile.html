@@ -1,0 +1,16 @@
+<h1>Welcome {{ user.first_name }}, this is from the user object.</h1>
+<h2>Welcome2 {{ user.drinker.name }}, this is from the related Drinker object. {{ user.username }}</h2>
+<p></p>
+<h3>Permission for the account, retrieved through the user object</h3>
+<ul>
+	{% if perms.usertrial.can_eat %}
+	<li> {{ user.first_name }} can eat. </li>
+	{% endif %}
+	{% if perms.usertrial.can_drink %}
+	<li> {{ user.first_name }} can drink.</li>
+	{% endif %}
+	{% if perms.usertrial.can_sing %}
+	<li>{{ user.first_name }} can sing.</li>
+	{% endif %}
+</ul>
+<a href="/usertrial/logout/">LOGOUT</a>

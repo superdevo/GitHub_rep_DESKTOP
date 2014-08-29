@@ -1,0 +1,19 @@
+{% load show_results %}
+
+<html>
+<head>
+	<title>List of available books</title>
+</head>
+<body>
+	<h1>Here below the newest available books:</h1>
+	<ul>
+		{% for b in list_of_books %}
+			<li><a href="{{ b.id }}">{{ b.title }}</a></li>
+		{% endfor %}
+	</ul>
+
+	
+			{% show_books_for_author "ww" %}
+
+</body>
+</html>

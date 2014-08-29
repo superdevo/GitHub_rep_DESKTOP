@@ -1,0 +1,11 @@
+<html>
+<body>
+{% if user.is_authenticated %}
+<p>Welcome back <a href="profile/">{{ user.drinker.name }}</a></p>
+{% else %}
+<p>HELLO, please register or login</p>
+{% endif %}
+<a href="get-pdf/">Download the PDF generated with Django and Reportlab</a></br>
+<a href="get-complex-pdf/">Download the PDF generated with Django, ReportLab and StringIO</a>
+</body>
+</html

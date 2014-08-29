@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+{% load staticfiles %}
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'books/style.css' %} "> 
+	<title>Contact us</title>
+</head>
+<body>
+	<h1>Contact us</h1>
+	<form action="." method="POST">
+	{% csrf_token %}
+	{% for field in contact_form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+    </div>
+	{% endfor %}
+			
+		<p><input type="submit" value="Submit"></p>
+	</form>
+</body>
+</html>
