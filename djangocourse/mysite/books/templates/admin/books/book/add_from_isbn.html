@@ -1,0 +1,8 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+	<form id="add-book-isbn" action="/admin/books/book/add/" method="POST">
+		{% csrf_token %}
+		<input name="isbn" type="text" placeholder="Type ISBN code here..."/>
+		<input type="submit" value="search and add"/>
+	</form>
+{% endblock %}

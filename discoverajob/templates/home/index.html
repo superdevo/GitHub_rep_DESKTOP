@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block login-register %}   
+ <div class="login_register">
+    <section class="loginform cf">  
+        <form name="login" action="/home/accounts/login/" method="post" accept-charset="utf-8">
+        {% csrf_token %}
+        {{ form_errors }}
+        <ul>                      
+            <li> 
+            <input type="username" name="username" placeholder="username" required></li>  
+            <li> 
+            <input type="password" name="password" placeholder="Password" required></li>  
+            <li>  
+            <input type="submit" value="Login"></li>
+            
+        </ul>  
+        </form>  
+   </section>  
+</div>
+ {% endblock %}
+{%block content %}
+    <section id="page">
+        <section id="home_splash">
+         <article id="main_1">
+            <h2>Be <strong>Curious</strong></h2>
+            <p style="color: black;">The first <strong>free</strong> community that connects students and professionals. <strong>Learn</strong> new things, have <strong>fun</strong> and <strong>experience</strong>.
+        </p><p>We are <strong>NOT</strong> a job finding service.</p>
+        <div id="sign-up-container">
+            <a href="/home/accounts/register/" class="sign-up-big">Get Started</a>
+        </div>
+         </article>
+        </section>
+    </section>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Post has been successfully saved!</h2>
+<p>Your 
+{% if request.user.customuser.is_student %}request{% else %}offer {% endif %} 
+will be displayed in {{ state_name }}, {{ city_name }} </p>
+<a href="/home/">Go back</a>
+{% endblock %}

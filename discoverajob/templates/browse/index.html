@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block links %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+
+{% endblock %}
+
+{% block onpageCSS %}
+ .geo-container {
+ 		margin: 50px 10px 0 10px;
+ 		border: 2px solid red;
+ 		float:left;
+
+	}
+ .city-preview-container{
+ 		margin-right:10px;
+ 		width: 550px;;
+ 		height: 450px;
+ 		border: 2px solid blue;
+ 		padding: 5px;
+ 		float: left;
+ 		display: inline;
+
+	}
+
+{% endblock %}
+
+{% block content %}
+<h2>Select a city to continue :)</h2>
+<div class="geo-container">
+	<div id="geo-country">
+		<select id="sel_country" name="sel_country" onchange="updateStates()">
+			<option value="">--</option>
+			{% for c in objs_c %}
+			<option value="{{ c.id }}" name="{{ c.country_name }}">{{ c.country_name }}</option>
+			{% endfor %}
+		</select>
+	</div>
+	<div id="geo-state">
+		<select id="sel_state" name="sel_state" disabled="true" onchange="updateCities()">
+			<option value="">--</option>
+		</select>
+	</div>
+	<div id="geo-city">
+		<select id="sel_city" name="sel_city" disabled="true" onchange="loadPreview()">
+			<option value="">--</option>
+		</select>
+	</div>
+</div>
+<div class="city-preview-container">
+	<div class="city-preview">
+		<!-- the html will be on a separate file and will be embedded async mode through an AJAX call -->
+		<div id="data-preview"></div>
+	</div>
+
+</div>
+
+{% endblock %}
+{% block JS %}
+<script type="text/javascript">
+function updateStates(){
+	if ($('#sel_country').val() != ''){
+		$('#sel_state').prop("disabled", false);
+		var selected_country = $('#sel_country').val()
+		//alert(selected_country);
+		$.ajax({
+			type:"GET",
+			url:"{% url 'browse.views.ajax_states' %}", 
+			data: {country_id: selected_country}, 
+			success: function(data){
+				$('#sel_state').html(data);
+					if ($('#sel_state').val() != '0'){
+						updateCities();
+					}
+				}
+		});
+	}else{
+		$('#sel_state').prop("disabled", true);
+		$('#sel_state').val('0');
+		$('#sel_city').prop("disabled", true);
+		$('#sel_city').val('0');
+
+	};
+	
+	//alert('Fire completed!');
+};
+
+function updateCities(){
+	if ($('#sel_state').val() != ''){
+		$('#sel_city').prop("disabled", false);
+		var selected_state = $('#sel_state').val()
+		//alert(selected_country);
+		$.ajax({
+			type:"GET",
+			url:"{% url 'browse.views.ajax_cities' %}", 
+			data: {state_id: selected_state}, 
+			success: function(data){
+				$('#sel_city').html(data);
+					if ($('#sel_city').val() != '0'){
+						loadPreview($('#sel_city').val());
+					}
+				}
+		});
+	}else{
+		$('#sel_city').prop("disabled", true);
+		$('#sel_city').val('0');
+	};
+	
+	//alert('Fire completed!');
+};
+
+function loadPreview(p_city_id){
+	if (typeof p_city_id === "undefined"){
+		p_city_id = $('#sel_city').val();
+	}
+
+	$.ajax({
+		type:"GET",
+		url:"{% url 'browse.views.ajax_preview' %}",
+		data: {city_id : p_city_id},
+		success: function(data){
+			$('#data-preview').html(data);
+		}
+
+	}); 
+};
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,6 @@
+<ul>
+	{% for u in users %}
+	<li>{{ u.first_name }} - {% if u.is_student %}Student{% else %}Professional{% endif %}</li>
+	{% endfor %}
+</ul>
+<p>{% if posts_count == 0 %}No available posts at the moment.{% else %}<a href="/comm/{{ country }}/{{ state }}/{{ city }}/">{{ posts_count }} post(s) available</a>{% endif %}</p>

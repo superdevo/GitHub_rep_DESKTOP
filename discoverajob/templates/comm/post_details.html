@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block links %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+{% endblock %}
+
+{% block onpageCSS %}
+.stars-list li {
+	display:inline;
+	text-decoration: none;
+}
+
+.stars-list li a:hover {
+	background-position: 0 -10px;
+	background-image: url("/static/images/star-over.png");
+}
+
+{% endblock %}
+
+{% block content %}
+<div style="border: 1px solid red; width: 300px; margin:auto; float:left;">
+<h2>{{ post.title }}</h2>
+<p>{{ post.content }}<p>
+<p>{{ post.keywords }}</p>
+<p>Rating: {{ rate|floatformat:2 }} of 5 stars</p>
+{% if has_commented %}
+<p>You have already rated this post.</p>
+{% else %}
+<div id="rating-container">
+<ul class="stars-list">
+	{% for i in "xxxxx" %}	
+	<li><a href="#" onclick="rate({{ forloop.counter }})"><img src="{% static "images/star.png" %}"/></a></li>
+	{% endfor %}
+</ul>
+</div>
+
+{% endif %}
+<a href="/home/">Go back</a>
+</div>
+
+{% endblock %}
+{% block JS %}
+<script type="text/javascript">
+function rate(p_rating){
+	var p_rate = p_rating;
+	$.ajax({
+			type:"GET",
+			url:"{% url 'comm.views.post_rate' %}", 
+			data: {post_id: {{post.id}}, rate: p_rating}, 
+			success: function(data){
+				$('.stars-list').prop('hidden', true);
+				$('#rating-container').html(data);
+				}
+		});
+};
+</script>
+{% endblock %}

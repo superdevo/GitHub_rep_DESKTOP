@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{%block content %}
+    <section id="page">
+        <section id="home_splash">
+        <p>We are sorry but the credentials supplied don't match any of our records, please try again. </br>
+        If you don&Amp;t have an account you can sign up for free here below.	
+        </p>
+        <form name="login" action="/home/accounts/login/" method="post" accept-charset="utf-8">
+        {% csrf_token %}
+        <ul>                      
+            <li> 
+            <input type="username" name="username" placeholder="username" required></li>  
+            <li> 
+            <input type="password" name="password" placeholder="Password" required></li>  
+            <li>  
+            <input type="submit" value="Login"></li>
+        </ul>  
+        </form> 
+        <div id="sign-up-container">
+            <a href="/home/accounts/register/" class="sign-up-big">Get Started</a>
+        </div>
+         </article>
+        </section>
+    </section>
+{% endblock %}

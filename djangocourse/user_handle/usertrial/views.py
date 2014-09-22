@@ -16,6 +16,7 @@ from cStringIO import StringIO
 # import for the permissions check on the restricted_zone view
 from django.contrib.auth.decorators import permission_required, login_required
 
+
 def load_template(request, which_view):
     return render_to_response(which_view, context_instance=RequestContext(request))
 

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class="profile big">
+		<ul>
+			<li>{{ profile.first_name }}</li>
+			<li>{{ profile.last_name }}</li>
+			<li>{{ profile.birthday }}</li>
+			<li>{{ profile.age }}</li>
+		<ul>
+
+		Profile description: </br>{{ profile.profile_description }}
+		
+		{{ profile.first_name }} is {% if profile.is_student %} a student {% endif %} from <a href="#">{{ current_city }}</a>, <a href="#">{{ current_state }}</a>. 
+	<div>	
+	
+{% endblock %}

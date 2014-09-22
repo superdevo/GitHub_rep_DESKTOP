@@ -29,6 +29,15 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+"""
+the apps:
+    django.contrib.redirects doesn't come by default, and it is essential to handle REDIRECTS
+    redirects also needs:
+    'django.contrib.sites'
+    and the SITE_ID settings set (ex: SITE_ID = 1)
+
+    ****** redirects can be handled directly from the admin page!!!!******
+"""
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -36,10 +45,18 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.redirects',
     'usertrial',
     'chicagocrime',
 )
 
+"""
+The middleware django.contrib.redirects.middleware.RedirectFallbackMiddleware doesn't come by default!
+This should be one of the last resources that django uses to find a match (it looks the DB tables dedicated to redirects, 
+    checking the old_path argument given.)
+
+"""
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,6 +64,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSOR = (
@@ -58,6 +76,9 @@ TEMPLATE_CONTEXT_PROCESSOR = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages"
 )
+
+#used to handle redirects
+SITE_ID = 3
 
 #provide our get_profiel
 AUTH_PROFILE_MODULE = 'usertrial.Drinker'

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block onpageCSS %}
+	.places-box {
+		float:right;
+		width:30%;
+		height: 200px;
+		margin-left: 10px;
+		display: inline;
+		border: 1px solid blue;
+	}
+	.box-container {
+		margin: 0 10px 0 10px;
+		padding: 10px;
+		border: 1px solid blue;
+		float:left;
+		width: 60%;
+	}
+	.box {
+	  float: left;
+	  width: 200px;
+	  height: 200px;
+	  margin: 1em;
+	  padding: 2px;
+	  border: 1px solid red;
+	}
+	.after-box {
+	  clear: left;
+	  border: 2px solid yellow;
+	}
+{% endblock %}
+
+{% block content %}
+
+{% if objs.count > 0 %}
+<h2>Browse and create {% if request.user.customuser.is_student %} requests {% else %} offers {% endif %} here.</h2>
+	<div class="box-container">
+	{% for x in objs %}
+		<div class="box">
+			<h4><a href="/comm/post/{{ x.id }}/">{{ x.title }}</a></h4>
+			<i>By <a href="/home/accounts/profile/{{ x.generating_user.id }}" >{{ x.generating_user.first_name }} {{ x.generating_user.last_name }}</a></br>{{ x.creation_date|date:"D d M Y" }} -- {{ x.postreview_set.count }} review(s)</i>
+			<p>{{ x.content|truncatechars:50 }}</p>
+		</div>
+	{% endfor %}
+	</div>
+	<div class="places-box">
+		<a href="/browse/geo/">Browse cities</a>
+	</div>
+{% else %}
+	<p style="text-color: red;">Snap! we didn't find any post at this time. Please come back later or sign up to this group to receive notifications.</p>
+{% endif %}	
+		<div class="after-box">
+			<a href="/comm/post/register/">Create your own</a>
+		</div>
+{% endblock %}
+
+

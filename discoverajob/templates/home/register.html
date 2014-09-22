@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{%block content %}
+<h1>Join Discoverajob, Sign up...it's free!</h1>
+<form id="register" action="/home/accounts/register/" method="POST">{% csrf_token %} 
+{% for field in sign_up_form %}
+	<div class="fieldWrapper">
+	{{ field.errors }}
+	{{ field.label_tag }} {{ field }}
+	</div>	
+{% endfor %}
+<input type="submit" value="Register"/>
+</form>
+{% endblock %}

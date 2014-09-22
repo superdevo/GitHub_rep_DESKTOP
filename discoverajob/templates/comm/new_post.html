@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{%block content %}
+<h1>Register a new post</h1>
+<form id="post" action="/comm/post/register/" method="POST">{% csrf_token %} 
+{% for field in post %}
+	<div class="fieldWrapper">
+	{{ field.errors }}
+	{{ field.label_tag }} {{ field }}
+	</div>	
+{% endfor %}
+<input type="submit" value="Save"/>
+</form>
+{% endblock %}

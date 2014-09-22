@@ -24,9 +24,10 @@ icontains:
 class IndexView(generic.ListView):
 	template_name = 'index.html'
 	context_object_name = 'list_of_books'
+	paginate_by=5
 
 	def get_queryset(self):
-		return Book.objects.filter(publication_date__lte=timezone.now()).order_by('-publication_date')[:5]
+		return Book.objects.filter(publication_date__lte=timezone.now()).order_by('-publication_date') #[:5]
 
 
 def search(request):

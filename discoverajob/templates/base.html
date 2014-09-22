@@ -1,0 +1,77 @@
+{#  {% load active_tag %} #}
+{% load staticfiles %}
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' />    
+
+   	<link rel='stylesheet' type='text/css' href="{% static "css/style.css" %}"/>
+    {% block links %}
+    {% endblock %}
+<title>{% block title %}Discoverajob - Shadow opportunities for students and professionals{% endblock %}</title>
+
+<style>
+{% block onpageCSS %}
+{% endblock %}
+</style>
+</head>
+
+<body>
+<header id='header' class='loading'>
+    <h1 id='logo'>
+        <a href="/home/"><img src="{% static "images/logo-cookie-ok.png" %}" /></a>
+    </h1>
+  
+    {% block sidebar %} 
+        
+    {% endblock %}
+
+    {% if user.is_authenticated %} 
+        <div class="user-profile">
+            <p>Hi, <a href="/home/accounts/profile/{{ user.customuser.id }}/">{{ user.first_name }}</a> - <a href="/home/accounts/logout/">Logout</a></p>
+        </div>
+    {% endif %}
+
+    {% block login-register %}
+    
+    {% endblock %}
+</header>
+
+<div id="wrapper">
+<!--
+{% block bread-crumbs %}   
+    {% if user.is_authenticated %}
+        <div>
+               <a href="/comm/places/all/"><span>Browse</span></a>        
+                 
+        <div>
+    {% endif %} 
+{% endblock %}
+-->
+{% block content%}
+
+{% endblock %}
+</div>
+
+
+<footer>
+<div id="footer">
+  <div id="footer-container">
+   <nav class="footer-items">
+        <ul>     
+           <li><a href="#"><span>About</span></a></li>
+           <li><a href="#"><span>Blog</span></a></li>
+           <li><a href="#"><span>How It Works</span></a></li>
+           <li><a href="#"><span>Contact Us</span></a></li>
+           <li><a href="#"><span>Terms</span></a></li>
+           <li><a href="#"><span>Privacy</span></a></li>
+        </ul>
+    </nav>
+   </div>
+</div>
+</footer>
+{% block JS %}
+{% endblock %}
+</body>
+</html>
